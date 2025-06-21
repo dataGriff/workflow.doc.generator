@@ -1,7 +1,7 @@
 [project]
-name = "hungovercoders_template_python_package"
+name = "hungovercoders_workflow_doc_gen"
 version = "0.1.1"
-description = "This is a template for a Python package created by Hungover Coders."
+description = "Workflow document generator."
 license = { file = "LICENSE" }
 readme = "README.md"
 authors = [
@@ -15,8 +15,8 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project.scripts]
-hungovercoders-template-hello = "hungovercoders_template_python_package.greetings:hello_cli"
-hungovercoders-validate-organisation = "hungovercoders_template_python_package.organisation:main"
+hungovercoders-template-hello = "hungovercoders_workflow_doc_gen.greetings:hello_cli"
+hungovercoders-azure-devops = "hungovercoders_workflow_doc_gen.azure_devops:main"
 
 # [tool.hatch.build]
 # include = [
@@ -37,7 +37,7 @@ hungovercoders-validate-organisation = "hungovercoders_template_python_package.o
 # allow-direct-references = true
 
 [tool.setuptools.package-data]
-hungovercoders_template_python_package = [
+hungovercoders_workflow_doc_gen = [
     "schemas/*.json",
     "schemas/**/*.json"
 ]

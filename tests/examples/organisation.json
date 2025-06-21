@@ -1,9 +1,0 @@
-{
-  "name": "Hungover Coders Inc.",
-  "founded": "2020-01-01",
-  "teams": [
-    { "team_name": "Beer" },
-    { "team_name": "Whiskey" },
-    { "team_name": "Cheese" }
-  ]
-}

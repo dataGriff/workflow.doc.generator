@@ -2,7 +2,7 @@
 Unit tests for greetings.py
 """
 import sys
-from hungovercoders_template_python_package import greetings
+from hungovercoders_workflow_doc_gen import greetings
 
 
 def test_hello_output(capsys):

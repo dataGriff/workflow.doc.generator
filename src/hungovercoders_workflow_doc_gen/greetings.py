@@ -1,6 +1,5 @@
-import argparse
 
-TODO: look to user typer library instead 
+import argparse
 
 def hello(name: str) -> None:
     """Greet the user by name."""
