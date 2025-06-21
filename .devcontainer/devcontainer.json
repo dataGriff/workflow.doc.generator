@@ -20,7 +20,10 @@
 				"vivaxy.vscode-conventional-commits",
 				"ms-vscode-remote.remote-containers",
 				"tamasfe.even-better-toml",
-				"charliermarsh.ruff"
+				"charliermarsh.ruff",
+				"evilz.vscode-reveal",
+				"marp-team.marp-vscode",
+				"wholroyd.jinja"
 			]
 		}
 	},

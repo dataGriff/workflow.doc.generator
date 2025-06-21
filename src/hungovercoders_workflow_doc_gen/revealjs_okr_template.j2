@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>{{ title }}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/theme/white.css" id="theme">
+  <style>
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      margin-bottom: 1em;
+    }
+    .box {
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 1em;
+      width: 30%;
+      box-sizing: border-box;
+      margin: 0.5em;
+      background: #f9f9f9;
+    }
+    h2, h3 {
+      margin-top: 0.5em;
+    }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- Title Slide -->
+      <section>
+        <h1>{{ title }}</h1>
+        <h3>{{ subtitle }}</h3>
+      </section>
+
+      <!-- Objectives Slide -->
+      <section>
+        <h2>Objectives</h2>
+        <div class="container">
+          {% for obj in objectives %}
+            <div class="box">
+              <h3>Objective {{ loop.index }}</h3>
+              <p>{{ obj }}</p>
+            </div>
+          {% endfor %}
+        </div>
+      </section>
+
+      <!-- Key Results Slide -->
+      <section>
+        <h2>Key Results</h2>
+        <div class="container">
+          {% for kr in key_results %}
+            <div class="box">
+              <h3>Key Result {{ loop.index }}</h3>
+              <p>{{ kr }}</p>
+            </div>
+          {% endfor %}
+        </div>
+      </section>
+
+      <!-- Hypotheses Slide -->
+      <section>
+        <h2>Hypotheses</h2>
+        <div class="container">
+          {% for hyp in hypotheses %}
+            <div class="box">
+              <h3>Hypothesis {{ loop.index }}</h3>
+              <p>{{ hyp }}</p>
+            </div>
+          {% endfor %}
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.min.js"></script>
+  <script>
+    Reveal.initialize();
+  </script>
+</body>
+</html>

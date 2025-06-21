@@ -16,7 +16,7 @@ def main() -> None:
     parser.add_argument("--project", required=True, help="Azure DevOps project name")
     parser.add_argument("--pat", required=True, help="Azure DevOps Personal Access Token")
     parser.add_argument("--output", default="okr_report.md", help="Output file (Markdown or JSON)")
-    parser.add_argument("--format", choices=["markdown", "raw-json"], default="markdown", help="Output format: markdown or raw-json")
+    parser.add_argument("--format", choices=["markdown", "raw-json", "revealjs"], default="markdown", help="Output format: markdown, raw-json, or revealjs")
     args = parser.parse_args()
 
     client = AzureDevOpsClient(args.org, args.project, args.pat)
@@ -32,11 +32,18 @@ def main() -> None:
         # Use new normalization logic that uses per-objective relations
         objectives = client.fetch_and_normalize_okrs_with_relations()
         formatter = MarkdownOKRFormatter()
-        markdown = formatter.format_markdown(objectives)
-        print(markdown)
-        with open(args.output, "w") as f:
-            f.write(markdown)
-        print(f"OKR Markdown report written to {args.output}")
+        if args.format == "revealjs":
+            revealjs_md = formatter.format_revealjs(objectives)
+            print(revealjs_md)
+            with open(args.output, "w") as f:
+                f.write(revealjs_md)
+            print(f"OKR Reveal.js Markdown slides written to {args.output}")
+        else:
+            markdown = formatter.format_markdown(objectives)
+            print(markdown)
+            with open(args.output, "w") as f:
+                f.write(markdown)
+            print(f"OKR Markdown report written to {args.output}")
 
 if __name__ == "__main__":
     main()

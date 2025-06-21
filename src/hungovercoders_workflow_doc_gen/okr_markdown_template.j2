@@ -1,0 +1,24 @@
+{# okr_markdown_template.j2: Jinja2 template for OKR Markdown output #}
+# Objectives and Key Results
+
+{% for obj in objectives %}
+## Objective: {{ obj.title or 'Untitled' }} (ID: {{ obj.id or '' }})
+**State:** {{ obj.state or '' }}
+
+**Objective:** {{ obj.objective or '' }}
+
+**Key Results:** {{ obj.key_results or '' }}
+
+**Method of Measure:** {{ obj.method_of_measure or '' }}
+
+**Objective Outcome:** {{ obj.objective_outcome or '' }}
+
+{% if obj.hypotheses %}### Hypotheses
+{% for hyp in obj.hypotheses %}- **Hypothesis:** {{ hyp.hypothesis or '' }} (ID: {{ hyp.id or '' }})
+  - **Title:** {{ hyp.title or '' }}
+  - **State:** {{ hyp.state or '' }}
+  - **Method of Measuring Hypothesis:** {{ hyp.method_of_measuring_hypothesis or '' }}
+  - **Hypothesis Outcome:** {{ hyp.hypothesis_outcome or '' }}
+{% endfor %}
+{% endif %}
+{% endfor %}
