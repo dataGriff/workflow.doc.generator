@@ -1,4 +1,5 @@
-- Create a python package for demonstrative purposes that can be cloned by others as a template to quickly set up a development environment for that purpose.
+- Python CLI to generate different stakeholder documentation from workflow tools such as azure devops, jira or github
+- Example outputs could be into markdown, word docs, google docs or presentations such as remark.js, though there could be more
 - Use Conventional Commits format when suggesting commit messages. Follow the format: <type>(<scope>): <short summary>
 - Use clear, descriptive function and variable names related to code quality, TODO detection, and complexity analysis.
 - Follow PEP8 style guidelines for all Python code.
