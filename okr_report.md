@@ -18,12 +18,6 @@
   - **Method of Measuring Hypothesis:** 
   - **Hypothesis Outcome:** 
 
-- **Hypothesis:**  (ID: 307)
-  - **Title:** test
-  - **State:** To Do
-  - **Method of Measuring Hypothesis:** 
-  - **Hypothesis Outcome:** 
-
 ## Objective: Increase Community Awareness through Terriffic Tech Knowledge Sharing (ID: 303)
 **State:** Proposed
 

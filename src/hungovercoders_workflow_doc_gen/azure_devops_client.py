@@ -200,8 +200,8 @@ class AzureDevOpsClient:
                         "title": cfields.get("System.Title", "Untitled"),
                         "state": cfields.get("System.State", ""),
                         "hypothesis": cfields.get("Custom.Hypothesis", ""),
-                        "method_of_measuring_hypothesis": cfields.get("Custom.MethodOfMeasuringHypothesis", ""),
-                        "hypothesis_outcome": cfields.get("Custom.HypothesisOutcome", "")
+                        "method_of_monitoring_hypothesis": cfields.get("Custom.MethodofMonitoringHypothesis", "blah"),
+                        "hypothesis_outcome": cfields.get("Custom.HypothesisResult", "Pending")
                     })
             objectives.append(obj)
         return objectives

@@ -65,24 +65,8 @@
     "multilineFieldsFormat": {},
     "relations": [
       {
-        "rel": "System.LinkTypes.Related",
-        "url": "https://dev.azure.com/griff182uk0203/61bfa296-449c-443e-8d74-7826bcc57a22/_apis/wit/workItems/308",
-        "attributes": {
-          "isLocked": false,
-          "name": "Related"
-        }
-      },
-      {
         "rel": "System.LinkTypes.Hierarchy-Forward",
         "url": "https://dev.azure.com/griff182uk0203/61bfa296-449c-443e-8d74-7826bcc57a22/_apis/wit/workItems/304",
-        "attributes": {
-          "isLocked": false,
-          "name": "Child"
-        }
-      },
-      {
-        "rel": "System.LinkTypes.Hierarchy-Forward",
-        "url": "https://dev.azure.com/griff182uk0203/61bfa296-449c-443e-8d74-7826bcc57a22/_apis/wit/workItems/307",
         "attributes": {
           "isLocked": false,
           "name": "Child"
