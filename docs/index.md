@@ -1,3 +1,3 @@
 # Welcome
 
-This is a template for creating Python packages. It includes a basic structure and some common files that are typically found in Python packages.
+This is a tool for outputting workflow tool content from azure devops, jira and github into other formats like markdown, pdfs, docs, presentations, etc.

@@ -1,7 +1,7 @@
 - Python CLI to generate different stakeholder documentation from workflow tools such as azure devops, jira or github
-- Example outputs could be into markdown, word docs, google docs or presentations such as remark.js, though there could be more
+- Example outputs could be into markdown, pdf, word docs, google docs or presentations such as remark.js, etc.
 - Use Conventional Commits format when suggesting commit messages. Follow the format: <type>(<scope>): <short summary>
-- Use clear, descriptive function and variable names related to code quality, TODO detection, and complexity analysis.
+- Use clear, descriptive function and variable names related to code quality
 - Follow PEP8 style guidelines for all Python code.
 - Include comprehensive docstrings for all public functions and classes.
 - Write unit tests for all major features, using pytest conventions.
