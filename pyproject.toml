@@ -15,29 +15,12 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project.scripts]
-hungovercoders-template-hello = "hungovercoders_workflow_doc_gen.greetings:hello_cli"
-hungovercoders-azure-devops = "hungovercoders_workflow_doc_gen.azure_devops:main"
-
-# [tool.hatch.build]
-# include = [
-#     "src/hungovercoders_template_python_package/schemas/**/*.json"
-# ]
-
-# [tool.hatch.build.targets.wheel]
-# include = [
-#     "src/hungovercoders_template_python_package/schemas/**/*.json"
-# ]
-
-# [tool.hatch.build.targets.sdist]
-# include = [
-#     "src/hungovercoders_template_python_package/schemas/**/*.json"
-# ]
-
-# [tool.hatch.metadata]
-# allow-direct-references = true
+workflow-doc-gen = "hungovercoders_workflow_doc_gen.__main__:main"
 
 [tool.setuptools.package-data]
 hungovercoders_workflow_doc_gen = [
     "schemas/*.json",
-    "schemas/**/*.json"
+    "schemas/**/*.json",
+    "templates/*.json",
+    "templates/**/*.json"
 ]

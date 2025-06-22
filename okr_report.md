@@ -1,54 +1,101 @@
 
 # Objectives and Key Results
 
-_Generated on: 2025-06-22 16:11:38_
+_Generated on: 2025-06-22 16:25:35_
 
 
-## Objective: Help Hungovercoders Bond with Super Socialisation
+## Objective: Increase Community Engagement hey
 
-**Link**: [Work Item](https://dev.azure.com/griff182uk0203/hungovercoders/_workitems/edit/302)
+**Link**: [Work Item](https://dev.azure.com/example/Project/_workitems/edit/1)
 
-**State:** Doing.
+**State:** active.
 
 **Objective:**  
-**Help Hungovercoders Bond with Super Socialisation**  
-Help Hungovercoders Bond with Super Socialisation It has been noted that hungovercoder account closure has been due to the lack of social connections in the physical world.  We want to stop this decline and help hungovercoders more easily get to gether to increase those social bonds!
+**Increase Community Engagement hey**  
+Boost participation in community events and online forums.
 
 **Key Results:**
 
-- Two hungovercoder technical meetups in Cardiff by the end of September 2025. One hungovercoder mega party in Cardiff by the end of October 2025.
+- Host 3 community meetups by Q3.
+- Increase forum posts by 50% by year end.
 
 **Method of Measure:**
 
+- Track event attendance and forum analytics.
 
 **Objective Outcome:**
-- Pending.
+
+- Meetups hosted and forum activity increased as planned.
 
 ### Hypotheses
 
-- **Hypothesis:** If we create a Local Pub Finding Application for the hungovercoders community then they will arrange a date for the mega party.  This will help us achieve the key result of having one mega party by the end of October 2025.
-  - **Link:** [Work Item](https://dev.azure.com/griff182uk0203/hungovercoders/_workitems/edit/304)
-  - **Title:** Local Pub Finding Application
-  - **State:** New
-  
+- **Hypothesis:** If we offer incentives for participation, engagement will rise.
+  - **Context:** Incentives include badges and gift cards.
+  - **Link:** [Work Item](https://dev.azure.com/example/Project/_workitems/edit/101)
+  - **Title:** Participation Incentives
+  - **State:** testing
+  - **Method of Measuring Hypothesis:** Compare engagement metrics before and after incentives.
+  - **Hypothesis Outcome:** Engagement increased by 30% after incentives.
+
+- **Hypothesis:** If we promote events on social media, attendance will improve.
+  - **Context:** Use Twitter and LinkedIn for promotion.
+  - **Link:** [Work Item](https://dev.azure.com/example/Project/_workitems/edit/102)
+  - **Title:** Social Media Promotion
+  - **State:** proposed
+  - **Method of Measuring Hypothesis:** Track RSVP numbers from social media links.
   - **Hypothesis Outcome:** Pending.
 
-## Objective: Increase Community Awareness through Terrific Tech Knowledge Sharing
+## Objective: Improve Platform Stability
 
-**Link**: [Work Item](https://dev.azure.com/griff182uk0203/hungovercoders/_workitems/edit/303)
+**Link**: [Work Item](https://dev.azure.com/example/Project/_workitems/edit/2)
 
-**State:** Proposed.
+**State:** review.
 
 **Objective:**  
-**Increase Community Awareness through Terrific Tech Knowledge Sharing**  
-Hungovercoders are finding it difficult to raise awareness in technlogy according to their latest feedback. We want to ensure that its seamless and recognisable that hungovercoders are promoting technical knowledge from the community.
+**Improve Platform Stability**  
+Reduce downtime and critical bugs in the platform.
 
 **Key Results:**
 
-- Four hungovercoders blogging by the end of September 2025.
+- Achieve 99.9% uptime for 6 consecutive months.
+- Reduce critical bug reports by 75% by year end.
 
 **Method of Measure:**
 
+- Monitor uptime logs and bug tracking system.
+
+**Objective Outcome:**
+
+- Uptime target met; bug reports reduced by 60%.
+
+### Hypotheses
+
+- **Hypothesis:** If we implement automated testing, bug rates will decrease.
+  - **Context:** Focus on regression and integration tests.
+  - **Link:** [Work Item](https://dev.azure.com/example/Project/_workitems/edit/201)
+  - **Title:** Automated Testing
+  - **State:** active
+  - **Method of Measuring Hypothesis:** Compare bug rates before and after automation.
+  - **Hypothesis Outcome:** Bug rates dropped by 40%.
+
+## Objective: Launch New Feature X
+
+**Link**: [Work Item](https://dev.azure.com/example/Project/_workitems/edit/3)
+
+**State:** proposed.
+
+**Objective:**  
+**Launch New Feature X**  
+Successfully launch and onboard users to Feature X.
+
+**Key Results:**
+
+- 1000 users onboarded within first month.
+- Feature X receives average rating of 4+ stars.
+
+**Method of Measure:**
+
+- Track onboarding analytics and user feedback.
 
 **Objective Outcome:**
 
@@ -56,23 +103,10 @@ Hungovercoders are finding it difficult to raise awareness in technlogy accordin
 
 ### Hypotheses
 
-## Objective: Add badge to README
-
-**Link**: [Work Item](https://dev.azure.com/griff182uk0203/hungovercoders/_workitems/edit/309)
-
-**State:** Done.
-
-**Objective:**  
-**Add badge to README**  
-
-
-**Key Results:**
-
-
-**Method of Measure:**
-
-
-**Objective Outcome:**
-- Pending.
-
-### Hypotheses
+- **Hypothesis:** If we provide in-app tutorials, onboarding will be faster.
+  - **Context:** Tutorials include videos and tooltips.
+  - **Link:** [Work Item](https://dev.azure.com/example/Project/_workitems/edit/301)
+  - **Title:** In-App Tutorials
+  - **State:** new
+  - **Method of Measuring Hypothesis:** Measure time to complete onboarding.
+  - **Hypothesis Outcome:** Pending.

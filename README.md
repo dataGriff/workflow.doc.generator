@@ -1,29 +1,30 @@
-# template.python.package
+# workflow.doc.generator
 
-Template to help quickly make python packages
-
-TODO: Add Todo generator for root of repo
-TODO: Add licensee checker
 
 ```bash
 export $(grep -v '^#' .env | xargs)
 ```
 
 ```bash
-
-``
-
-```bash
-python3 src/hungovercoders_workflow_doc_gen/cli.py --org griff182uk0203 --project hungovercoders --pat $AZURE_DEVOPS_PAT_TOKEN --format markdown
-
-python3 src/hungovercoders_workflow_doc_gen/cli.py --org griff182uk0203 --project hungovercoders --pat $AZURE_DEVOPS_PAT_TOKEN --format raw-json
-
-python3 src/hungovercoders_workflow_doc_gen/cli.py --org griff182uk0203 --project hungovercoders --pat $AZURE_DEVOPS_PAT_TOKEN --format pdf
-
-python3 src/hungovercoders_workflow_doc_gen/cli.py --org griff182uk0203 --project hungovercoders --pat $AZURE_DEVOPS_PAT_TOKEN --format doc
-
+pip install -e .
 ```
 
+## Json
+
 ```bash
-python src/hungovercoders_workflow_doc_gen/generic_cli.py --input /workspaces/workflow.doc.generator/tests/example_input/okr_summary.example.json --output okr_report.md
+workflow-doc-gen json --input tests/example_input/okr_summary.example.json --format markdown
+
+workflow-doc-gen json --input tests/example_input/okr_summary.example.json --format doc
+
+workflow-doc-gen json --input tests/example_input/okr_summary.example.json --format pdf
+```
+
+## Azure Devops
+
+```bash
+workflow-doc-gen azure_devops --org griff182uk0203 --project hungovercoders --pat $AZURE_DEVOPS_PAT_TOKEN --format markdown
+
+workflow-doc-gen azure_devops --org griff182uk0203 --project hungovercoders --pat $AZURE_DEVOPS_PAT_TOKEN --format doc
+
+workflow-doc-gen azure_devops --org griff182uk0203 --project hungovercoders --pat $AZURE_DEVOPS_PAT_TOKEN --format pdf
 ```
