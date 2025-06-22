@@ -157,25 +157,32 @@ class AzureDevOpsClient:
             objectives.append(wresp.json())
         return objectives
 
-    def fetch_and_normalize_okrs_with_relations(self) -> List[Dict[str, Any]]:
+    def fetch_and_normalize_okrs_with_relations(self) -> dict:
         """
         Fetch and normalize OKR data using per-objective relations.
-        Returns a list of objectives with required fields and their direct children (hypotheses).
+        Returns a dict with a top-level 'objectives' key, matching the schema.
         """
         objectives = []
         items = self.fetch_objectives_with_relations()
         for item in items:
             fields = item.get("fields", {})
+            obj_id = fields.get("System.Id", item.get("id"))
             obj = {
-                "id": fields.get("System.Id", item.get("id")),
+                "id": obj_id,
                 "title": fields.get("System.Title", "Untitled"),
                 "state": fields.get("System.State", ""),
-                "key_results": fields.get("Custom.KeyResults", ""),
                 "objective": fields.get("Custom.Objective", ""),
+                "key_results": fields.get("Custom.KeyResults", []),
                 "method_of_measure": fields.get("Custom.MethodOfMeasure", ""),
                 "objective_outcome": fields.get("Custom.ObjectiveOutcome", ""),
+                "link": f"https://dev.azure.com/{self.organization}/{self.project}/_workitems/edit/{obj_id}",
                 "hypotheses": []
             }
+            # Ensure key_results is a list of strings
+            if isinstance(obj["key_results"], str):
+                obj["key_results"] = [kr.strip() for kr in obj["key_results"].split("\n") if kr.strip()]
+            elif not isinstance(obj["key_results"], list):
+                obj["key_results"] = []
             # Find direct children via relations
             child_ids = []
             for rel in item.get("relations", []):
@@ -186,7 +193,7 @@ class AzureDevOpsClient:
                     child_id = url.split("/workItems/")[-1]
                     if child_id.isdigit():
                         child_ids.append(int(child_id))
-            # Fetch and attach child work items
+            # Fetch and attach child work items as hypotheses
             if child_ids:
                 for cid in child_ids:
                     workitem_url = self.base_url + f"wit/workitems/{cid}?api-version=7.0"
@@ -195,13 +202,21 @@ class AzureDevOpsClient:
                         logger.error(f"Failed to fetch child {cid}: {wresp.status_code} {wresp.text}")
                         continue
                     cfields = wresp.json().get("fields", {})
-                    obj["hypotheses"].append({
-                        "id": cfields.get("System.Id", cid),
+                    hyp_id = cfields.get("System.Id", cid)
+                    hypothesis = {
+                        "id": hyp_id,
                         "title": cfields.get("System.Title", "Untitled"),
                         "state": cfields.get("System.State", ""),
                         "hypothesis": cfields.get("Custom.Hypothesis", ""),
-                        "method_of_monitoring_hypothesis": cfields.get("Custom.MethodofMonitoringHypothesis", "blah"),
-                        "hypothesis_outcome": cfields.get("Custom.HypothesisResult", "Pending")
-                    })
+                        "hypothesis_context": cfields.get("Custom.HypothesisContext", ""),
+                        "link": f"https://dev.azure.com/{self.organization}/{self.project}/_workitems/edit/{hyp_id}",
+                        "method_of_measuring_hypothesis": cfields.get("Custom.MethodOfMeasuringHypothesis", ""),
+                        "hypothesis_outcome": cfields.get("Custom.HypothesisOutcome", "")
+                    }
+                    # Ensure required fields for hypothesis
+                    for field in ["hypothesis", "title", "state"]:
+                        if not hypothesis.get(field):
+                            hypothesis[field] = ""
+                    obj["hypotheses"].append(hypothesis)
             objectives.append(obj)
-        return objectives
+        return {"objectives": objectives}

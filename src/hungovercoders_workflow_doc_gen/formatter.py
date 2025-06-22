@@ -18,15 +18,27 @@ class Formatter:
         template_dir = os.path.dirname(os.path.abspath(__file__))
         self.env = Environment(loader=FileSystemLoader(template_dir + '/templates'))
 
-    def format_markdown(self, objectives: List[Dict[str, Any]]) -> str:
+    def _extract_objectives(self, okr_data: Any) -> List[Dict[str, Any]]:
         """
-        Generate a Markdown document from a list of objectives with required fields and their hypotheses using a Jinja2 template.
+        Helper to extract objectives list from either a dict with 'objectives' or a list.
+        Always returns a list.
+        """
+        if isinstance(okr_data, dict) and "objectives" in okr_data and isinstance(okr_data["objectives"], list):
+            return okr_data["objectives"]
+        if isinstance(okr_data, list):
+            return okr_data
+        return []
+
+    def format_markdown(self, okr_data: Any) -> str:
+        """
+        Generate a Markdown document from OKR data (dict or list) using a Jinja2 template.
 
         Args:
-            objectives: List of objective dicts with id, title, state, key_results, objective, method_of_measure, objective_outcome, hypotheses.
+            okr_data: Dict with 'objectives' key or list of objective dicts.
         Returns:
             Markdown string representing the OKR structure.
         """
+        objectives = self._extract_objectives(okr_data)
         try:
             template = self.env.get_template('okr_markdown_template.j2')
             return template.render(objectives=objectives)
@@ -37,15 +49,16 @@ class Formatter:
             logger.error(f"Failed to format markdown: {e}")
             return ""
 
-    def format_doc(self, objectives: List[Dict[str, Any]]) -> str:
+    def format_doc(self, okr_data: Any) -> str:
         """
-        Generate a Word-compatible HTML document from a list of objectives using a Jinja2 template.
+        Generate a Word-compatible HTML document from OKR data (dict or list) using a Jinja2 template.
 
         Args:
-            objectives: List of objective dicts with id, title, state, key_results, objective, method_of_measure, objective_outcome, hypotheses.
+            okr_data: Dict with 'objectives' key or list of objective dicts.
         Returns:
             HTML string representing the OKR structure, compatible with Word.
         """
+        objectives = self._extract_objectives(okr_data)
         try:
             template = self.env.get_template('okr_doc_template.j2')
             return template.render(objectives=objectives)
@@ -56,14 +69,15 @@ class Formatter:
             logger.error(f"Failed to format word-compatible HTML: {e}")
             return ""
 
-    def format_pdf(self, objectives: List[Dict[str, Any]], output_path: str) -> None:
+    def format_pdf(self, okr_data: Any, output_path: str) -> None:
         """
-        Generate a PDF document from a list of objectives using the Word-compatible HTML Jinja2 template and WeasyPrint.
+        Generate a PDF document from OKR data (dict or list) using the Word-compatible HTML Jinja2 template and WeasyPrint.
 
         Args:
-            objectives: List of objective dicts.
+            okr_data: Dict with 'objectives' key or list of objective dicts.
             output_path: Path to write the PDF file.
         """
+        objectives = self._extract_objectives(okr_data)
         try:
             template = self.env.get_template('okr_doc_template.j2')
             html_str = template.render(objectives=objectives)
