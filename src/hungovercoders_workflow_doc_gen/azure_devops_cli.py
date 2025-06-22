@@ -7,7 +7,7 @@ import json
 import os
 from hungovercoders_workflow_doc_gen.formatter import Formatter
 from hungovercoders_workflow_doc_gen.azure_devops_client import AzureDevOpsClient
-import jsonschema
+from hungovercoders_workflow_doc_gen.cli_utils import validate_against_schema, get_output_path
 
 logger = logging.getLogger(__name__)
 
@@ -16,37 +16,29 @@ def main() -> None:
     parser.add_argument("--org", required=True, help="Azure DevOps organization name")
     parser.add_argument("--project", required=True, help="Azure DevOps project name")
     parser.add_argument("--pat", required=True, help="Azure DevOps Personal Access Token")
-    parser.add_argument("--output-dir", default=".", help="Output directory (default: current directory)")
+    parser.add_argument("--output-dir", default="outputs/", help="Output directory (default: current directory)")
     parser.add_argument("--format", choices=["markdown", "doc", "pdf", "raw-json"], default="markdown", help="Output format: markdown, doc (Word-compatible HTML), pdf, or raw-json")
-    parser.add_argument("--validate", action="store_true", help="Validate OKR data against JSON schema before output")
+    parser.add_argument("--schema", default=None, help="Path to JSON schema (default: okr_summary.json in schemas dir)")
+    parser.add_argument("--no-validate", action="store_true", help="Skip validation against JSON schema")
     args = parser.parse_args()
 
     client = AzureDevOpsClient(args.org, args.project, args.pat)
     okr_data = client.fetch_and_normalize_okrs_with_relations()
 
-    if args.validate:
-        schema_path = os.path.join(os.path.dirname(__file__), 'schemas/okr_summary.json')
+    # Determine schema path
+    schema_path = args.schema
+    if not schema_path:
+        here = os.path.dirname(os.path.abspath(__file__))
+        schema_path = os.path.join(here, 'schemas/okr_summary.json')
         if not os.path.exists(schema_path):
-            schema_path = os.path.join(os.path.dirname(__file__), '../schemas/okr_summary.json')
-        with open(schema_path, encoding='utf-8') as f:
-            schema = json.load(f)
-        try:
-            jsonschema.validate(instance=okr_data, schema=schema)
-            print("OKR data validated successfully against schema.")
-        except jsonschema.ValidationError as e:
-            logger.error(f"OKR data validation failed: {e.message}")
-            raise SystemExit(1)
+            schema_path = os.path.join(here, '../schemas/okr_summary.json')
+
+    # Validate
+    if not args.no_validate:
+        validate_against_schema(okr_data, schema_path)
 
     formatter = Formatter()
-    # Determine file extension based on format
-    ext_map = {
-        "markdown": ".md",
-        "doc": ".html",
-        "pdf": ".pdf",
-        "raw-json": ".json"
-    }
-    ext = ext_map.get(args.format, ".md")
-    output_path = os.path.join(args.output_dir, f"okr_summary{ext}")
+    output_path = get_output_path(args.output_dir, args.format)
 
     if args.format == "markdown":
         output_str = formatter.format_markdown(okr_data)

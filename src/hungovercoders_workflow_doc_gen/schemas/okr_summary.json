@@ -25,12 +25,16 @@
                         "type": "string",
                         "enum": [
                             "new",
+                            "New",
                             "discovery",
+                            "Proposed",
                             "proposed",
                             "ready",
                             "active",
                             "review",
-                            "closed"
+                            "closed",
+                            "Doing",
+                            "Done"
                         ]
                     },
                     "objective": {
@@ -76,6 +80,7 @@
                                     "type": "string",
                                     "enum": [
                                         "new",
+                                        "New",
                                         "discovery",
                                         "proposed",
                                         "ready",
