@@ -1,0 +1,89 @@
+{
+  "objectives": [
+    {
+      "id": 1,
+      "title": "Increase Community Engagement hey",
+      "link": "https://dev.azure.com/example/Project/_workitems/edit/1",
+      "state": "active",
+      "objective": "Boost participation in community events and online forums.",
+      "key_results": [
+        "Host 3 community meetups by Q3.",
+        "Increase forum posts by 50% by year end."
+      ],
+      "method_of_measure": "Track event attendance and forum analytics.",
+      "objective_outcome": "Meetups hosted and forum activity increased as planned.",
+      "hypotheses": [
+        {
+          "id": 101,
+          "hypothesis": "If we offer incentives for participation, engagement will rise.",
+          "hypothesis_context": "Incentives include badges and gift cards.",
+          "link": "https://dev.azure.com/example/Project/_workitems/edit/101",
+          "title": "Participation Incentives",
+          "state": "testing",
+          "method_of_measuring_hypothesis": "Compare engagement metrics before and after incentives.",
+          "hypothesis_outcome": "Engagement increased by 30% after incentives."
+        },
+        {
+          "id": 102,
+          "hypothesis": "If we promote events on social media, attendance will improve.",
+          "hypothesis_context": "Use Twitter and LinkedIn for promotion.",
+          "link": "https://dev.azure.com/example/Project/_workitems/edit/102",
+          "title": "Social Media Promotion",
+          "state": "proposed",
+          "method_of_measuring_hypothesis": "Track RSVP numbers from social media links.",
+          "hypothesis_outcome": "Pending."
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Improve Platform Stability",
+      "link": "https://dev.azure.com/example/Project/_workitems/edit/2",
+      "state": "review",
+      "objective": "Reduce downtime and critical bugs in the platform.",
+      "key_results": [
+        "Achieve 99.9% uptime for 6 consecutive months.",
+        "Reduce critical bug reports by 75% by year end."
+      ],
+      "method_of_measure": "Monitor uptime logs and bug tracking system.",
+      "objective_outcome": "Uptime target met; bug reports reduced by 60%.",
+      "hypotheses": [
+        {
+          "id": 201,
+          "hypothesis": "If we implement automated testing, bug rates will decrease.",
+          "hypothesis_context": "Focus on regression and integration tests.",
+          "link": "https://dev.azure.com/example/Project/_workitems/edit/201",
+          "title": "Automated Testing",
+          "state": "active",
+          "method_of_measuring_hypothesis": "Compare bug rates before and after automation.",
+          "hypothesis_outcome": "Bug rates dropped by 40%."
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Launch New Feature X",
+      "link": "https://dev.azure.com/example/Project/_workitems/edit/3",
+      "state": "proposed",
+      "objective": "Successfully launch and onboard users to Feature X.",
+      "key_results": [
+        "1000 users onboarded within first month.",
+        "Feature X receives average rating of 4+ stars."
+      ],
+      "method_of_measure": "Track onboarding analytics and user feedback.",
+      "objective_outcome": "Pending.",
+      "hypotheses": [
+        {
+          "id": 301,
+          "hypothesis": "If we provide in-app tutorials, onboarding will be faster.",
+          "hypothesis_context": "Tutorials include videos and tooltips.",
+          "link": "https://dev.azure.com/example/Project/_workitems/edit/301",
+          "title": "In-App Tutorials",
+          "state": "new",
+          "method_of_measuring_hypothesis": "Measure time to complete onboarding.",
+          "hypothesis_outcome": "Pending."
+        }
+      ]
+    }
+  ]
+}

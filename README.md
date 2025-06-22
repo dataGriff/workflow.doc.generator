@@ -17,3 +17,7 @@ python3 src/hungovercoders_workflow_doc_gen/cli.py --org griff182uk0203 --projec
 python3 src/hungovercoders_workflow_doc_gen/cli.py --org griff182uk0203 --project hungovercoders --pat $AZURE_DEVOPS_PAT_TOKEN --output okr_slides.md --format revealjs
 
 ```
+
+```bash
+python src/hungovercoders_workflow_doc_gen/generic_cli.py --input /workspaces/workflow.doc.generator/tests/example_input/okr_summary.example.json --output okr_report.md
+```

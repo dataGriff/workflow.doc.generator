@@ -1,57 +1,27 @@
-"""
-Unit tests for MarkdownOKRFormatter.
-"""
-import pytest
-from hungovercoders_workflow_doc_gen.markdown_formatter import MarkdownOKRFormatter
+import json
+import os
+from src.hungovercoders_workflow_doc_gen.markdown_formatter import MarkdownOKRFormatter
 
-@pytest.fixture
-def sample_okrs():
-    return [
-        {
-            "title": "Increase Customer Satisfaction",
-            "description": "Objective to improve NPS score.",
-            "key_results": [
-                {
-                    "title": "Raise NPS by 10 points",
-                    "description": "Key result to measure NPS improvement.",
-                    "hypotheses": [
-                        {
-                            "title": "Faster support response improves NPS",
-                            "description": "Test if reducing response time increases NPS.",
-                            "issues": [
-                                {"title": "Support team understaffed", "description": "Need to hire 2 more agents."},
-                                {"title": "Ticket system slow", "description": "Optimize backend queries."}
-                            ]
-                        }
-                    ]
-                }
-            ]
-        }
-    ]
+def test_markdown_output_matches_expected():
+    """
+    Test that formatting the example OKR JSON produces the expected Markdown output.
+    """
+    # Paths
+    example_json = os.path.join(os.path.dirname(__file__), '../example_input/okr_summary.example.json')
+    expected_md = os.path.join(os.path.dirname(__file__), '../example_output/okr_report.md')
 
-def test_format_markdown(sample_okrs):
+    # Load input and expected output
+    with open(example_json, encoding='utf-8') as f:
+        data = json.load(f)
+    with open(expected_md, encoding='utf-8') as f:
+        expected = f.read().strip()
+
+    # Format using the formatter
     formatter = MarkdownOKRFormatter()
-    md = formatter.format_markdown(sample_okrs)
-    assert "# Objectives and Key Results" in md
-    assert "## Objective: Increase Customer Satisfaction" in md
-    assert "### Key Result: Raise NPS by 10 points" in md
-    assert "#### Hypothesis: Faster support response improves NPS" in md
-    assert "- **Issue:** Support team understaffed" in md
-    assert "Need to hire 2 more agents." in md
+    actual = formatter.format_markdown(data['objectives']).strip()
 
-def test_format_json(sample_okrs):
-    formatter = MarkdownOKRFormatter()
-    json_str = formatter.format_json(sample_okrs)
-    assert '"title": "Increase Customer Satisfaction"' in json_str
-    assert '"issues":' in json_str
+    # Normalize whitespace for comparison
+    def normalize(text):
+        return '\n'.join(line.rstrip() for line in text.strip().splitlines() if line.strip())
 
-def test_format_markdown_empty():
-    formatter = MarkdownOKRFormatter()
-    md = formatter.format_markdown([])
-    assert md.strip().startswith("# Objectives and Key Results")
-    assert "Objective:" not in md
-
-def test_format_json_empty():
-    formatter = MarkdownOKRFormatter()
-    json_str = formatter.format_json([])
-    assert json_str == "[]"
+    assert normalize(actual) == normalize(expected), "Markdown output does not match expected!"

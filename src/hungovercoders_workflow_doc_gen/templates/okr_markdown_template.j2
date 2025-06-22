@@ -1,6 +1,5 @@
 {# okr_markdown_template.j2: Jinja2 template for OKR Markdown output #}
 # Objectives and Key Results
-
 {% for obj in objectives %}
 ## Objective: {{ obj.title or 'Untitled' }}
 
@@ -13,30 +12,25 @@
 {{ obj.objective | default('') | striptags | replace('\n', ' ') }}
 
 **Key Results:**
-{% if obj.key_results_list %}
-{% for kr in obj.key_results_list %}- {{ kr | striptags | replace('\n', ' ') }}
-{% endfor %}
-{% elif obj.key_results %}- {{ obj.key_results | striptags | replace('\n', ' ') }}
-{% endif %}
-
+{% set key_results = obj.key_results_list if obj.key_results_list is defined else obj.key_results %}
+{% if key_results %}{% for kr in key_results %}- {{ kr | striptags | replace('\n', ' ') }}
+{% endfor %}{% endif %}
 **Method of Measure:**
+
 {% if obj.method_of_measure %}- {{ obj.method_of_measure | striptags | replace('\n', ' ') }}
 {% endif %}
-
 **Objective Outcome:**
-{% if obj.objective_outcome %}- {{ obj.objective_outcome | striptags | replace('\n', ' ') }}
+{% if obj.objective_outcome %}
+- {{ obj.objective_outcome | striptags | replace('\n', ' ') }}
 {% else %}- Pending.
 {% endif %}
-
 ### Hypotheses
-{% if obj.hypotheses %}
-{% for hyp in obj.hypotheses %}- **Hypothesis:** {{ hyp.hypothesis | striptags | replace('\n', ' ') }}  
-  {{ hyp.hypothesis_context | default('') | striptags | replace('\n', ' ') }}
-  {% if hyp.link %}- **Link:** [Work Item]({{ hyp.link }})
-  {% endif %}- **Title:** {{ hyp.title or '' }}
+{% if obj.hypotheses %}{% for hyp in obj.hypotheses %}
+- **Hypothesis:** {{ hyp.hypothesis | striptags | replace('\n', ' ') }}
+  {% if hyp.hypothesis_context %}- **Context:** {{ hyp.hypothesis_context | striptags | replace('\n', ' ') }}
+  {% endif %}{% if hyp.link %}- **Link:** [Work Item]({{ hyp.link }}){% endif %}
+  - **Title:** {{ hyp.title or '' }}
   - **State:** {{ hyp.state or '' }}
-  - **Method of Measuring Hypothesis:** {% if hyp.method_of_measuring_hypothesis %}- {{ hyp.method_of_measuring_hypothesis | striptags | replace('\n', ' ') }}
-  {% endif %}- **Hypothesis Outcome:** {% if hyp.hypothesis_outcome %}{{ hyp.hypothesis_outcome | striptags | replace('\n', ' ') }}{% else %}Pending.{% endif %}
-{% endfor %}
-{% endif %}
-{% endfor %}
+  {% if hyp.method_of_measuring_hypothesis %}- **Method of Measuring Hypothesis:** {{ hyp.method_of_measuring_hypothesis | striptags | replace('\n', ' ') }}{% endif %}
+  - **Hypothesis Outcome:** {% if hyp.hypothesis_outcome %}{{ hyp.hypothesis_outcome | striptags | replace('\n', ' ') }}{% else %}Pending.{% endif %}
+{% endfor %}{% endif %}{% endfor %}

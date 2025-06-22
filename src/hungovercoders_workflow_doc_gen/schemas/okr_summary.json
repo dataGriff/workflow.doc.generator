@@ -1,0 +1,115 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "okr_summary",
+    "type": "object",
+    "properties": {
+        "objectives": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": [
+                            "integer",
+                            "string"
+                        ]
+                    },
+                    "title": {
+                        "type": "string"
+                    },
+                    "link": {
+                        "type": "string",
+                        "format": "uri"
+                    },
+                    "state": {
+                        "type": "string",
+                        "enum": [
+                            "new",
+                            "discovery",
+                            "proposed",
+                            "ready",
+                            "active",
+                            "review",
+                            "closed"
+                        ]
+                    },
+                    "objective": {
+                        "type": "string"
+                    },
+                    "key_results": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "method_of_measure": {
+                        "type": "string"
+                    },
+                    "objective_outcome": {
+                        "type": "string"
+                    },
+                    "hypotheses": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                    "type": [
+                                        "integer",
+                                        "string"
+                                    ]
+                                },
+                                "hypothesis": {
+                                    "type": "string"
+                                },
+                                "hypothesis_context": {
+                                    "type": "string"
+                                },
+                                "link": {
+                                    "type": "string",
+                                    "format": "uri"
+                                },
+                                "title": {
+                                    "type": "string"
+                                },
+                                "state": {
+                                    "type": "string",
+                                    "enum": [
+                                        "new",
+                                        "discovery",
+                                        "proposed",
+                                        "ready",
+                                        "active",
+                                        "testing",
+                                        "review",
+                                        "closed"
+                                    ]
+                                },
+                                "method_of_measuring_hypothesis": {
+                                    "type": "string"
+                                },
+                                "hypothesis_outcome": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "hypothesis",
+                                "title",
+                                "state"
+                            ]
+                        }
+                    }
+                },
+                "required": [
+                    "title",
+                    "state",
+                    "objective",
+                    "key_results"
+                ]
+            }
+        }
+    },
+    "required": [
+        "objectives"
+    ]
+}
