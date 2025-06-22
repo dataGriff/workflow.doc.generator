@@ -15,6 +15,7 @@
 </head>
 <body>
   <h1>Objectives and Key Results</h1>
+  <p><em>Generated on: {{ now('local', '%Y-%m-%d %H:%M:%S') }}</em></p>
   {% for obj in objectives %}
   <div class="objective">
     <h2>Objective: {{ obj.title or 'Untitled' }}</h2>

@@ -16,7 +16,20 @@ class Formatter:
     def __init__(self) -> None:
         # Set up Jinja2 environment for templates
         template_dir = os.path.dirname(os.path.abspath(__file__))
-        self.env = Environment(loader=FileSystemLoader(template_dir + '/templates'))
+        self.env = Environment(
+            loader=FileSystemLoader(template_dir + '/templates'),
+            extensions=["jinja2.ext.do", "jinja2.ext.loopcontrols"]
+        )
+        # Add 'now' function to Jinja2 environment
+        from jinja2 import pass_context
+        import datetime
+        @pass_context
+        def now(context, tz=None, fmt=None):
+            dt = datetime.datetime.now()
+            if fmt:
+                return dt.strftime(fmt)
+            return dt.isoformat()
+        self.env.globals['now'] = now
 
     def _extract_objectives(self, okr_data: Any) -> List[Dict[str, Any]]:
         """

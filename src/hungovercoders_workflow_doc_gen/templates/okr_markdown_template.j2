@@ -1,5 +1,8 @@
 {# okr_markdown_template.j2: Jinja2 template for OKR Markdown output #}
 # Objectives and Key Results
+
+_Generated on: {{ now('local', '%Y-%m-%d %H:%M:%S') }}_
+
 {% for obj in objectives %}
 ## Objective: {{ obj.title or 'Untitled' }}
 

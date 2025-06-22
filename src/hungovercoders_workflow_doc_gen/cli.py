@@ -16,7 +16,7 @@ def main() -> None:
     parser.add_argument("--org", required=True, help="Azure DevOps organization name")
     parser.add_argument("--project", required=True, help="Azure DevOps project name")
     parser.add_argument("--pat", required=True, help="Azure DevOps Personal Access Token")
-    parser.add_argument("--output", default="okr_report.md", help="Output file (Markdown, HTML, PDF, or JSON)")
+    parser.add_argument("--output-dir", default=".", help="Output directory (default: current directory)")
     parser.add_argument("--format", choices=["markdown", "doc", "pdf", "raw-json"], default="markdown", help="Output format: markdown, doc (Word-compatible HTML), pdf, or raw-json")
     parser.add_argument("--validate", action="store_true", help="Validate OKR data against JSON schema before output")
     args = parser.parse_args()
@@ -38,23 +38,33 @@ def main() -> None:
             raise SystemExit(1)
 
     formatter = Formatter()
+    # Determine file extension based on format
+    ext_map = {
+        "markdown": ".md",
+        "doc": ".html",
+        "pdf": ".pdf",
+        "raw-json": ".json"
+    }
+    ext = ext_map.get(args.format, ".md")
+    output_path = os.path.join(args.output_dir, f"okr_summary{ext}")
+
     if args.format == "markdown":
         output_str = formatter.format_markdown(okr_data)
-        with open(args.output, "w") as f:
+        with open(output_path, "w") as f:
             f.write(output_str)
-        print(f"OKR Markdown report written to {args.output}")
+        print(f"OKR Markdown report written to {output_path}")
     elif args.format == "doc":
         output_str = formatter.format_doc(okr_data)
-        with open(args.output, "w") as f:
+        with open(output_path, "w") as f:
             f.write(output_str)
-        print(f"OKR Word-compatible HTML report written to {args.output}")
+        print(f"OKR Word-compatible HTML report written to {output_path}")
     elif args.format == "pdf":
-        formatter.format_pdf(okr_data, args.output)
-        print(f"OKR PDF report written to {args.output}")
+        formatter.format_pdf(okr_data, output_path)
+        print(f"OKR PDF report written to {output_path}")
     elif args.format == "raw-json":
-        with open(args.output, "w") as f:
+        with open(output_path, "w") as f:
             json.dump(okr_data, f, indent=2)
-        print(f"OKR JSON report written to {args.output}")
+        print(f"OKR JSON report written to {output_path}")
 
 if __name__ == "__main__":
     main()

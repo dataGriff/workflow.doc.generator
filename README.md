@@ -10,9 +10,17 @@ export $(grep -v '^#' .env | xargs)
 ```
 
 ```bash
-python3 src/hungovercoders_workflow_doc_gen/cli.py --org griff182uk0203 --project hungovercoders --pat $AZURE_DEVOPS_PAT_TOKEN --output okr_report.md --format markdown
 
-python3 src/hungovercoders_workflow_doc_gen/cli.py --org griff182uk0203 --project hungovercoders --pat $AZURE_DEVOPS_PAT_TOKEN --output okr_raw.json --format raw-json
+``
+
+```bash
+python3 src/hungovercoders_workflow_doc_gen/cli.py --org griff182uk0203 --project hungovercoders --pat $AZURE_DEVOPS_PAT_TOKEN --format markdown
+
+python3 src/hungovercoders_workflow_doc_gen/cli.py --org griff182uk0203 --project hungovercoders --pat $AZURE_DEVOPS_PAT_TOKEN --format raw-json
+
+python3 src/hungovercoders_workflow_doc_gen/cli.py --org griff182uk0203 --project hungovercoders --pat $AZURE_DEVOPS_PAT_TOKEN --format pdf
+
+python3 src/hungovercoders_workflow_doc_gen/cli.py --org griff182uk0203 --project hungovercoders --pat $AZURE_DEVOPS_PAT_TOKEN --format doc
 
 ```
 
