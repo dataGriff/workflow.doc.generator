@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>OKR Report</title>
+  <style>
+    body { font-family: Calibri, Arial, sans-serif; }
+    h1, h2, h3 { color: #2d7ff9; }
+    ul { margin-bottom: 1em; }
+    .objective { margin-bottom: 2em; }
+    .hypothesis { margin-left: 2em; }
+    table { border-collapse: collapse; width: 100%; }
+    th, td { border: 1px solid #ccc; padding: 6px; }
+  </style>
+</head>
+<body>
+  <h1>Objectives and Key Results</h1>
+  {% for obj in objectives %}
+  <div class="objective">
+    <h2>Objective: {{ obj.title or 'Untitled' }}</h2>
+    {% if obj.link %}<p><b>Link:</b> <a href="{{ obj.link }}">Work Item</a></p>{% endif %}
+    <p><b>State:</b> {{ obj.state or '' }}</p>
+    <p><b>Objective:</b> <br><b>{{ obj.title or 'Untitled' }}</b><br>{{ obj.objective or '' }}</p>
+    <p><b>Key Results:</b></p>
+    <ul>
+      {% set key_results = obj.key_results_list if obj.key_results_list is defined else obj.key_results %}
+      {% if key_results %}
+        {% for kr in key_results %}
+          <li>{{ kr }}</li>
+        {% endfor %}
+      {% endif %}
+    </ul>
+    <p><b>Method of Measure:</b> {{ obj.method_of_measure or '' }}</p>
+    <p><b>Objective Outcome:</b> {{ obj.objective_outcome or 'Pending.' }}</p>
+    <h3>Hypotheses</h3>
+    {% if obj.hypotheses %}
+      <ul>
+      {% for hyp in obj.hypotheses %}
+        <li class="hypothesis">
+          <b>Hypothesis:</b> {{ hyp.hypothesis or '' }}<br>
+          {% if hyp.hypothesis_context %}<b>Context:</b> {{ hyp.hypothesis_context }}<br>{% endif %}
+          {% if hyp.link %}<b>Link:</b> <a href="{{ hyp.link }}">Work Item</a><br>{% endif %}
+          <b>Title:</b> {{ hyp.title or '' }}<br>
+          <b>State:</b> {{ hyp.state or '' }}<br>
+          {% if hyp.method_of_measuring_hypothesis %}<b>Method of Measuring Hypothesis:</b> {{ hyp.method_of_measuring_hypothesis }}<br>{% endif %}
+          <b>Hypothesis Outcome:</b> {{ hyp.hypothesis_outcome or 'Pending.' }}
+        </li>
+      {% endfor %}
+      </ul>
+    {% endif %}
+  </div>
+  {% endfor %}
+</body>
+</html>
