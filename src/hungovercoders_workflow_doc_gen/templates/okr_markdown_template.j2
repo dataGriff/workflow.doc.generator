@@ -1,0 +1,42 @@
+{# okr_markdown_template.j2: Jinja2 template for OKR Markdown output #}
+# Objectives and Key Results
+
+{% for obj in objectives %}
+## Objective: {{ obj.title or 'Untitled' }}
+
+{% if obj.link %}**Link**: [Work Item]({{ obj.link }})
+
+{% endif %}**State:** {{ obj.state or '' }}.
+
+**Objective:**  
+**{{ obj.title or 'Untitled' }}**  
+{{ obj.objective | default('') | striptags | replace('\n', ' ') }}
+
+**Key Results:**
+{% if obj.key_results_list %}
+{% for kr in obj.key_results_list %}- {{ kr | striptags | replace('\n', ' ') }}
+{% endfor %}
+{% elif obj.key_results %}- {{ obj.key_results | striptags | replace('\n', ' ') }}
+{% endif %}
+
+**Method of Measure:**
+{% if obj.method_of_measure %}- {{ obj.method_of_measure | striptags | replace('\n', ' ') }}
+{% endif %}
+
+**Objective Outcome:**
+{% if obj.objective_outcome %}- {{ obj.objective_outcome | striptags | replace('\n', ' ') }}
+{% else %}- Pending.
+{% endif %}
+
+### Hypotheses
+{% if obj.hypotheses %}
+{% for hyp in obj.hypotheses %}- **Hypothesis:** {{ hyp.hypothesis | striptags | replace('\n', ' ') }}  
+  {{ hyp.hypothesis_context | default('') | striptags | replace('\n', ' ') }}
+  {% if hyp.link %}- **Link:** [Work Item]({{ hyp.link }})
+  {% endif %}- **Title:** {{ hyp.title or '' }}
+  - **State:** {{ hyp.state or '' }}
+  - **Method of Measuring Hypothesis:** {% if hyp.method_of_measuring_hypothesis %}- {{ hyp.method_of_measuring_hypothesis | striptags | replace('\n', ' ') }}
+  {% endif %}- **Hypothesis Outcome:** {% if hyp.hypothesis_outcome %}{{ hyp.hypothesis_outcome | striptags | replace('\n', ' ') }}{% else %}Pending.{% endif %}
+{% endfor %}
+{% endif %}
+{% endfor %}
