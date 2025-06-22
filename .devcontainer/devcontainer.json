@@ -23,7 +23,8 @@
 				"charliermarsh.ruff",
 				"evilz.vscode-reveal",
 				"marp-team.marp-vscode",
-				"wholroyd.jinja"
+				"wholroyd.jinja",
+				"tomoki1207.pdf"
 			]
 		}
 	},

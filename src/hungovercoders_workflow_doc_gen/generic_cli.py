@@ -6,8 +6,7 @@ import json
 import os
 import logging
 import sys
-from hungovercoders_workflow_doc_gen.markdown_formatter import MarkdownOKRFormatter
-from jinja2 import Environment, FileSystemLoader
+from hungovercoders_workflow_doc_gen.formatter import Formatter
 import jsonschema
 
 logger = logging.getLogger(__name__)
@@ -16,7 +15,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Validate OKR JSON and output Markdown or Word-compatible HTML.")
     parser.add_argument("--input", required=True, help="Input JSON file (must match okr_summary schema)")
     parser.add_argument("--output", default="okr_report.md", help="Output file (Markdown or HTML)")
-    parser.add_argument("--format", choices=["markdown", "doc"], default="markdown", help="Output format: markdown or word")
+    parser.add_argument("--format", choices=["markdown", "doc", "pdf"], default="markdown", help="Output format: markdown, word, or pdf")
     parser.add_argument("--schema", default=None, help="Path to JSON schema (default: okr_summary.json in schemas dir)")
     parser.add_argument("--no-validate", action="store_true", help="Skip validation against JSON schema")
     args = parser.parse_args()
@@ -45,23 +44,20 @@ def main() -> None:
             sys.exit(1)
 
     objectives = data["objectives"]
+    formatter = Formatter()
     if args.format == "markdown":
-        formatter = MarkdownOKRFormatter()
         markdown = formatter.format_markdown(objectives)
-        print(markdown)
         with open(args.output, "w") as f:
             f.write(markdown)
         print(f"OKR Markdown report written to {args.output}")
     elif args.format == "doc":
-        # Render using the word-compatible HTML template
-        template_dir = os.path.dirname(os.path.abspath(__file__)) + "/templates"
-        env = Environment(loader=FileSystemLoader(template_dir))
-        template = env.get_template("okr_doc_template.j2")
-        html = template.render(objectives=objectives)
-        print(html)
+        html = formatter.format_doc(objectives)
         with open(args.output, "w") as f:
             f.write(html)
         print(f"OKR Word-compatible HTML report written to {args.output}")
+    elif args.format == "pdf":
+        formatter.format_pdf(objectives, args.output)
+        print(f"OKR PDF report written to {args.output}")
 
 if __name__ == "__main__":
     main()

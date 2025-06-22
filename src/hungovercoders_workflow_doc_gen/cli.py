@@ -6,7 +6,7 @@ import logging
 import json
 import os
 from typing import Any
-from hungovercoders_workflow_doc_gen.markdown_formatter import MarkdownOKRFormatter
+from hungovercoders_workflow_doc_gen.formatter import MarkdownOKRFormatter
 from hungovercoders_workflow_doc_gen.azure_devops_client import AzureDevOpsClient
 import jsonschema
 

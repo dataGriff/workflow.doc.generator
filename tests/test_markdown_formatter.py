@@ -1,6 +1,6 @@
 import json
 import os
-from src.hungovercoders_workflow_doc_gen.markdown_formatter import MarkdownOKRFormatter
+from hungovercoders_workflow_doc_gen.formatter import MarkdownOKRFormatter
 
 def test_markdown_output_matches_expected():
     """
